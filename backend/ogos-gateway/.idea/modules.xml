@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tarun.verma-gateway_module/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/tarun.verma-gateway_module/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tarun.verma-gateway_module/ogos-gateway/ogos-gateway.iml" filepath="$PROJECT_DIR$/tarun.verma-gateway_module/ogos-gateway/ogos-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tarun.verma-ogos-gateway.iml" filepath="$PROJECT_DIR$/.idea/tarun.verma-ogos-gateway.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,68 @@
+<form name="form"  #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+    
+            <div class="col-12 address-details">
+                <h6 class="mt-8">Address Details*</h6>
+                
+              </div>
+              
+                <div class="col-md-12">
+                  <label  class="form-label">House no</label>
+                  <input [(ngModel)]="houseNum" id="house" #house="ngModel" name="house" required type="number" class="form-control" >
+                
+                  <div class="text-danger" *ngIf="(houseNum==undefined) && house.touched">
+                    <div>House Number is required</div>
+                </div>
+
+                </div>
+                
+                <div class="col-md-12">
+                  <label  class="form-label">Street</label>
+                  <input [(ngModel)]="form.street" name="street" #street="ngModel" required type="text" class="form-control">
+                  <div class="text-danger" *ngIf="(form.street=='') && street.touched">
+                    <div>Street is required</div>
+                </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label  class="form-label">Area</label>
+                    <input [(ngModel)]="form.area" name="area" #area="ngModel" required type="text" class="form-control">
+                    <div class="text-danger" *ngIf="(form.area=='') && area.touched">
+                        <div>Area is required</div>
+                    </div>
+                </div>
+                 
+                <div class="col-md-12">
+                    <label  class="form-label">City</label>
+                    <input [(ngModel)]="form.city" name="city" #city="ngModel" required type="text" class="form-control" >
+                    <div class="text-danger" *ngIf="(form.city=='') && city.touched">
+                        <div>City is required</div>
+                    </div> 
+                </div>
+ 
+                <div class="col-md-12">
+                    <label  class="form-label">Pincode</label>
+                    <input [(ngModel)]="form.pincode" name="pincode" #pincode="ngModel" required type="text" class="form-control" >
+                    <div class="text-danger" *ngIf="(form.pincode=='') && pincode.touched">
+                        <div>Pincode is required</div>
+                    </div>
+                </div>
+                  
+
+                    <div class="col-md-12 w-60px sign-up">
+                        <button  type="submit" class="btn btn-primary">Add Address </button>
+                      </div>
+ 
+            </div>
+            </div>
+            </div>
+            <div class="alert alert-warning" *ngIf="isSignUpFailed">
+                {{ errorMessage }}
+              </div>
+            </form>
+            
+          <div class="alert alert-success" *ngIf="isSuccessful">
+           Address added successfully!
+          </div>

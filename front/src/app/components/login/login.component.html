@@ -1,0 +1,72 @@
+<router-outlet></router-outlet>
+
+
+<div class="container">
+    <div class="card login-card">
+        <div class="card-body">
+  
+  
+            <form
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate>
+                
+                        
+                  
+                <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label  class="form-label">Email*</label>
+                                    <input type="email" class="form-control" name="email"  [(ngModel)]="user.email" required
+                                    pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+                                     email
+                                   
+                                    #email="ngModel"
+                                    [class.is-invalid]="email.invalid && email.touched">
+                                    <div *ngIf="email.errors && (email.invalid && email.touched)">
+                                      <small class="text-danger" *ngIf="email.errors.required">Email id is required</small>
+                                      <small class="text-danger" *ngIf="email.errors.pattern">Email should be written in valid format</small>
+                                      </div>
+                                    
+                                  </div>
+                                  </div>
+                          
+                    
+                  </div>
+                <div class="form-group">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label  class="form-label">Password*</label>
+                          <input type="password" class="form-control"   name="password" [(ngModel)]="user.password"  required
+                          #password="ngModel"
+                          [class.is-invalid]=" (password.invalid && password.touched)">
+                          
+                          <div *ngIf="password.errors && (password.invalid && password.touched)">
+        
+                            <small class="text-danger" *ngIf="password.errors.required"> Password is required</small>
+                          </div>
+                        </div>
+                        </div>
+        
+                        
+                  </div>
+                  <div class="form-group form-check">
+                    <a routerLink="/forgotpassword">Forgotten your Login Details?</a>
+                  </div>
+                  <button type="submit" class="btn btn-primary login-btn">Login</button>
+
+                    <div
+                    class="alert alert-danger"
+                    role="alert"
+                    *ngIf="f.submitted && isLoginFailed"
+                    >
+                    Login failed: {{ errorMessage }}
+                  </div>
+                </form>
+                <a class="float-right"  routerLink= "/register">New User ? Register here</a>
+    <router-outlet></router-outlet>
+                
+            </div>
+            </div>
+            </div>

@@ -1,0 +1,38 @@
+<div class="card-top container-fluid">
+
+</div>
+<div class="container">
+    <div class="row">
+         <ng-container *ngFor="let product of  products | filter:searchKey:'name' "> 
+            
+            <div class="card col-md-3">
+                <img src="{{product.imageURL}}" alt="">
+                <h5>{{product.name}}</h5>
+                <p>{{ product.price | currency: 'INR'}}/{{ product.measurementUnit }}</p>
+                <p> </p>
+                <button class="btn btn-primary" (click)= addtocart(product)> Add to cart</button>
+                
+            </div>
+        </ng-container>
+        <div class="card-col-md-3">
+
+        </div>
+    </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li *ngIf='currentPage!=0' class="page-item">
+            <a class="page-link" (click)="getPage(currentPage-1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li *ngFor='let in of counter(totalPage) ;let i = index' class="page-item"><a class="page-link" (click)="getPage(i)">{{i+1}}</a></li>
+          <li *ngIf='currentPage+1!=totalPage'class="page-item">
+            <a class="page-link"  (click)="getPage(currentPage+1)"  aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+</div>

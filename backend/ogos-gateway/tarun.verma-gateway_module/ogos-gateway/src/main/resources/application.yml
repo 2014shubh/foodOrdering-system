@@ -1,0 +1,24 @@
+server:
+  port: 9003
+ 
+spring:
+  application:
+    name: ogos-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+            
+management: 
+  endpoints: 
+    web: 
+      exposure:  
+        include: "*"
+   

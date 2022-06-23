@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="alert alert-success" *ngIf="emailRes">
+    {{emailResponse}}
+  </div>
+  <div class="alert alert-success" *ngIf="tokenR">
+    {{tokenRes}}
+  </div>
+  <div class="alert alert-warning" *ngIf="emailEr">
+    {{ emailErr }}
+  </div>
+  <div class="alert alert-warning" *ngIf="tokenErr">
+    {{ tokenRes }}
+  </div>
+  <div class="card register-card">
+    <div class="card-body">
+
+      <h6>Signup</h6>
+      <hr>
+      <form class="row g-3" name="form" (ngSubmit)="frm.form.valid && tokenR && onSubmit()" #frm="ngForm" novalidate>
+        <div class="row">
+          <div class="col-md-12">
+            <label class="form-label">Firstname*</label>
+            <input type="text" class="form-control" name="firstname" [(ngModel)]="user.firstname" required
+              pattern="^[a-zA-Z]+$" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched">
+            <div *ngIf="firstname.errors && (firstname.invalid && firstname.touched)">
+              <small class="text-danger" *ngIf="firstname.errors.required">First Name is required</small>
+              <small class="text-danger" *ngIf="firstname.errors.pattern">Firstname should only contains
+                characters</small>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label class="form-label">Lastname*</label>
+            <input type="text" class="form-control" name="lastname" [(ngModel)]="user.lastname" required required
+              pattern="^[a-zA-Z]+$" #lastname="ngModel" [class.is-invalid]="lastname.invalid && lastname.touched">
+            <div *ngIf="lastname.errors && (lastname.invalid && lastname.touched)">
+              <small class="text-danger" *ngIf="lastname.errors.required">Last Name is required</small>
+              <small class="text-danger" *ngIf="lastname.errors.pattern">Lastname should only contains
+                characters</small>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label class="form-label">Email*</label>
+            <input type="email" [attr.disabled]="tokenR?'':null" class="form-control" name="email" [(ngModel)]="user.email" required
+              id='#email' pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" email #email="ngModel"
+              [class.is-invalid]="email.invalid && email.touched && !tokenR">
+            <div *ngIf="email.errors && (email.invalid && email.touched)">
+              <small class="text-danger" *ngIf="email.errors.required">Email is required</small>
+              <small class="text-danger" *ngIf="email.errors.pattern">Email should be written in valid format</small>
+             
+            </div>
+            <div *ngIf="!tokenR && email.touched">
+              <small class="text-danger" *ngIf="!tokenR">Email should be validated</small>
+            </div>
+
+
+          </div>
+          <div class="col-12 w-60px sign-up">
+            <button [attr.disabled]="tokenR?'':null" id="#verify"  class="btn btn-primary register-btn" (click)="sendMail()">Verify Email</button>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="emailRes">
+            <div class="col-md-12">
+              <label class="form-label">Enter the token that has been sent to your mail</label>
+              <input type="text" class="form-control" name="token" [(ngModel)]="token" required>
+               
+            </div>
+        </div>
+
+        <div *ngIf="emailRes">
+        <button  class="btn btn-primary login-btn" (click)="validateToken()">Validate</button>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label class="form-label">Password*</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="user.password" required
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" #password="ngModel"
+              [class.is-invalid]=" (password.invalid && password.touched)">
+
+            <div *ngIf="password.errors && (password.invalid && password.touched)">
+
+              <small class="text-danger" *ngIf="password.errors.required"> Password is required</small>
+              <small class="text-danger" *ngIf="password.errors.pattern">Must contain at least one number and one
+                uppercase and lowercase letter, and at least 8 or more characters</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+        <div class="col-md-12">
+                    <label for="pwd">Confirm password:</label>
+                    <input type="password" class="form-control" name="cpassword" [(ngModel)]="form.cpassword" #cpassword="ngModel" required
+                    [class.is-invalid]="(cpassword.invalid && cpassword.touched)">
+                    <small class="text-danger" [class.d-none]="cpassword.value==password.value || cpassword.untouched">not matching </small>
+                      </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-md-12">
+            <label for="telNo" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" name="phoneNo" [(ngModel)]="user.mobile" required
+              pattern="^((\\+91-?)|0)?[0-9]{10}$" #phoneNo="ngModel"
+              [class.is-invalid]="phoneNo.invalid && phoneNo.touched">
+            <div *ngIf="phoneNo.errors && (phoneNo.invalid && phoneNo.touched)">
+              <small class="text-danger" *ngIf="phoneNo.errors.required">Phone number is required</small>
+              <small class="text-danger" *ngIf="phoneNo.errors.pattern">Please, Enter 10 digit Mobile Number.</small>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-12 w-60px sign-up">
+            <button type="submit" class="btn btn-primary register-btn">Sign up </button>
+          </div>
+        </div>
+        <div class="alert alert-warning" *ngIf="frm.submitted && isSignUpFailed">
+          Signup failed!<br />{{ errorMessage }}
+        </div>
+      </form>
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Your registration is successful!
+      </div>
+    </div>
+  </div>

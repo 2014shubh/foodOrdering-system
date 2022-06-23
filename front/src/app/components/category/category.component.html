@@ -1,0 +1,30 @@
+<div class="card-top container-fluid">
+    <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle ml-md-3" (click)="getCategory()"href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Shop by Category
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+          <a class="dropdown-item" *ngFor= "let category of categories; let i=index" (click)="getProducts(i)">{{categories[i].categoryName}}</a>
+        </div>
+      </li>
+</div>
+<div class="container">
+    <div class="row">
+         <ng-container *ngFor="let product of  productList "> 
+            
+            <div class="card col-md-3">
+                <img src="{{product.imageURL}}" alt="">
+                <h5>{{product.name}}</h5>
+                <p>{{ product.price | currency: 'INR'}}/{{ product.measurementUnit }}</p>
+                <p> </p>
+                <button class="btn btn-primary" (click)= addtocart(product)> Add to cart</button>
+                
+            </div>
+        </ng-container>
+        <div class="card-col-md-3">
+
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,93 @@
+<form name="form"  #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+    <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-2 pt-0" >Roles</legend>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" [(ngModel)]="form.role"  name="gridRadios" id="gridRadios1" value="mod" checked>
+              <label class="form-check-label" for="gridRadios1">
+                Inventory
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" [(ngModel)]="form.role" name="gridRadios" id="gridRadios2" value="delivery">
+              <label class="form-check-label" for="gridRadios2">
+                Delivery Partner
+              </label>
+            </div>
+          </div>
+          <div class="alert-danger" *ngIf="(form.role=='') && f.submitted">
+            <div>Role is required</div>
+        </div>
+        </div>
+      </fieldset>
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+         <input type="email" [(ngModel)]="form.email"  class="form-control" name="email"  required
+              id='#email' pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"  email #email="ngModel"  [class.is-invalid]="email.invalid && email.touched">
+      </div>
+      <div *ngIf="email.errors && (email.invalid && email.touched)">
+        <small class="text-danger" *ngIf="email.errors.required">Email is required</small>
+        <small class="text-danger" *ngIf="email.errors.pattern">Email should be written in valid format</small>
+       
+      </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="FirstName" class="col-sm-2 col-form-label">FirstName </label>
+        <div class="col-sm-10">
+          <input type="text" [(ngModel)]="form.firstname" name="firstname" class="form-control" id="FirstName" placeholder="FirstName" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="LastName" class="col-sm-2 col-form-label">LastName</label>
+        <div class="col-sm-10">
+          <input type="text" [(ngModel)]="form.lastname" class="form-control" name="lastname" id="LastName" placeholder="LastName" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="MobileNo"  class="col-sm-2 col-form-label">MobileNo</label>
+        <div class="col-sm-10">
+          
+            <input type="tel" [(ngModel)]="form.mobile" name="phoneNo" pattern="^((\\+91-?)|0)?[0-9]{10}$" class="form-control" id="Telephone"
+            aria-describedby="telephoneHelp" placeholder="Enter telephone" required #phoneNo="ngModel"
+            [class.is-invalid]="phoneNo.invalid && phoneNo.touched">
+            
+            <div *ngIf="phoneNo.errors && (phoneNo.invalid && phoneNo.touched)">
+                <small class="text-danger" *ngIf="phoneNo.errors.required">Phone number is required</small>
+                <small class="text-danger" *ngIf="phoneNo.errors.pattern">Please, Enter 10 digit Mobile Number.</small>
+              </div>
+        </div>
+      </div>
+    <div class="form-group row">
+      <label for="password" class="col-sm-2 col-form-label">Password</label>
+      
+      <div class="col-sm-10">
+        
+        <input type="password" [(ngModel)]="form.password" class="form-control" id="psw" 
+        name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required  #password="ngModel"
+        [class.is-invalid]=" (password.invalid && password.touched)">
+
+        <div *ngIf="password.errors && (password.invalid && password.touched)">
+            <small class="text-danger" *ngIf="password.errors.required"> Password is required</small>
+            <small class="text-danger" *ngIf="password.errors.pattern">Must contain at least one number and one
+              uppercase and lowercase letter, and at least 8 or more characters</small>
+          </div>
+      </div>
+    </div>
+    
+   
+    <div class="form-group row">
+        <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-primary">Add User</button>
+      </div>
+    </div>
+    <div class="alert alert-warning" *ngIf="form.submitted && isSignUpFailed">
+        Signup failed!<br />{{ errorMessage }}
+      </div>
+  </form>
+  <div class="alert alert-success" *ngIf="isSuccessful">
+   User registered successfully!
+  </div>
